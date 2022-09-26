@@ -1,69 +1,42 @@
-import React from 'react'
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CContainer,
-  CForm,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const Register = () => {
+function Register() {
+  const [registerForm, setRegisterForm] = useState({
+    companyName: '',
+    companyDescription: '',
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setRegisterForm(() => {
+      return { ...registerForm, [id]: value }
+    })
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await axios.post('http://localhost:4000/app/v1/register', registerForm)
+  }
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={9} lg={7} xl={6}>
-            <CCard className="mx-4">
-              <CCardBody className="p-4">
-                <CForm>
-                  <h1>Register</h1>
-                  <p className="text-medium-emphasis">Create your account</p>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="Username" autoComplete="username" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Repeat password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
-                  </div>
-                </CForm>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        </CRow>
-      </CContainer>
+    <div className='container-fluid d-flex flex-column justify-content-center align-items-center bg-light' style={{ minHeight: '100vh' }}>
+      <div className='col-6 d-flex flex-column justify-content-center align-items-center bg-white p-5 rounded-4'>
+        <h1 style={{ color: '#5141E0', marginBottom: '50px', textAlign: 'center' }}>SIGN UP</h1>
+        <form className='d-flex flex-column w-100' onSubmit={handleSubmit}>
+          <label htmlFor='companyName' className='form-label text-black-50'>Company Name</label>
+          <input type='text' onChange={handleChange} className='form-control mb-3' id='companyName' />
+          <label htmlFor='companyDescription' className='form-label text-black-50'>Description</label>
+          <input type='text' onChange={handleChange} className='form-control mb-3' id='companyDescription' />
+          <label htmlFor='email' className='form-label text-black-50'>E-mail</label>
+          <input type='email' onChange={handleChange} className='form-control mb-3' id='email' />
+          <label htmlFor='password' className='form-label text-black-50'>Password</label>
+          <input type='password' onChange={handleChange} className='form-control mb-3' id='password' />
+          <button type='submit' className='btn btn-primary mt-3 px-5 align-self-center'>Sign In</button>
+          <span className='text-secondary align-self-center mt-3'>Already have an account? <Link to='/login'>Click here</Link> to sign in</span>
+        </form>
+      </div>
     </div>
   )
 }
