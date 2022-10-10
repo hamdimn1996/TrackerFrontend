@@ -49,11 +49,17 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'))
 const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 // const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
+const Company = React.lazy(() => import('./views/pages/company/ListCompanies'))
+const CreateCompany = React.lazy(() => import('./views/pages/company/CreateCompany'))
+const UpdateCompany = React.lazy(() => import('./views/pages/company/UpdateCompany'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
+  { path: '/company', name: 'Company', element: Company, exact: true },
+  { path: '/company/create', name: 'Company', element: CreateCompany, exact: true },
+  { path: '/company/update/:id', name: 'Company', element: UpdateCompany, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },

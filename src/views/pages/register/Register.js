@@ -1,8 +1,10 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function Register() {
+  const navigate = useNavigate()
   const [registerForm, setRegisterForm] = useState({
     companyName: '',
     companyDescription: '',
@@ -18,7 +20,14 @@ function Register() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await axios.post('http://localhost:4000/app/v1/register', registerForm)
+    try {
+      const response = await axios.post('http://localhost:4000/app/v1/register', registerForm)
+      toast.success(response.data.message)
+      navigate('/login')
+    } catch (error) {
+      toast.error(error.response.data.message)  
+    }
+    
   }
   return (
     <div className='container-fluid d-flex flex-column justify-content-center align-items-center bg-light' style={{ minHeight: '100vh' }}>
