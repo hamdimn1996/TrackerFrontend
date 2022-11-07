@@ -7,6 +7,7 @@ import {
   cilCursor,
   cilDescription,
   cilDrop,
+  cilFax,
   cilNotes,
   cilPencil,
   cilPuzzle,
@@ -40,7 +41,7 @@ const _nav = [
     component: CNavItem,
     name: 'Company',
     to: '/company',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilFax} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
