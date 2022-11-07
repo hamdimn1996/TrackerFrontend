@@ -1,8 +1,8 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ForgetPasswordModal from './ForgetPasswordModal'
+import authService from './../../services/auth'
 
 function Login() {
   const navigate = useNavigate()
@@ -21,7 +21,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:4000/app/v1/login/' , loginForm)
+      const response = await authService.login(loginForm)
+      localStorage.setItem('accessToken',response.data.token)
       toast.success(response.data.message)
       navigate('/dashboard')
     } catch (error) {
