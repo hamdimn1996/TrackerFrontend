@@ -1,11 +1,12 @@
 import { cilPen, cilTrash } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import React, { useEffect, useState } from 'react'
-import { Link} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { toast } from 'react-toastify'
 import companyService from '../../services/company'
 
 function ListCompanies() {
+  const navigate = useNavigate()
   const [campanies, setCompanies] = useState([])
   
   const handleDelete = async (id) => {
@@ -14,13 +15,20 @@ function ListCompanies() {
     toast.success(response.data.message)
   }
   const getCompanies = async () => {
-    const response = await companyService.getAllCompanies();
-    setCompanies(response.data)
+    try {
+      const response = await companyService.getAllCompanies();
+      setCompanies(response.data)
+    } catch (error) {
+      console.log(error);
+      toast.success(error.response.data.message)
+      navigate('/login')
+    }
   }
   useEffect(() => {
     
     getCompanies()
-  }, [])
+    return
+  })
   return (
     <div className="card">
       <div className="card-header">

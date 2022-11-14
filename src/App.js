@@ -5,6 +5,7 @@ import './scss/style.scss'
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ResetPassword from './views/pages/reset/ResetPassword';
+import PrivateRoute from './views/PrivateRoute';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -45,7 +46,7 @@ class App extends Component {
               <Route exact path="/resetPassword/:token" name="Reset Password Page" element={<ResetPassword />} />
               <Route exact path="/404" name="Page 404" element={<Page404 />} />
               <Route exact path="/500" name="Page 500" element={<Page500 />} />
-              <Route path="*" name="Home" element={<DefaultLayout />} />
+              <Route path="*" name="Home" element={<PrivateRoute><DefaultLayout /></PrivateRoute> } />
             </Routes>
           </Suspense>
         </Router>
