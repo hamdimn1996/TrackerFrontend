@@ -10,7 +10,6 @@ const PrivateRoute = ({ children }) => {
     const token = localStorage.getItem('accessToken')
     if (token !== null) {
         const expire = isExpiredToken(token)
-        console.log(expire);
         if (expire) {
             toast.error('Token expired!')
             localStorage.removeItem('accessToken')

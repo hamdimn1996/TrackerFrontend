@@ -45,6 +45,12 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Event',
+    to: '/event',
+    icon: <CIcon icon={cilFax} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Typography',
     to: '/theme/typography',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
