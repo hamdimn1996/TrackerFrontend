@@ -48,9 +48,7 @@ function CreateCompany() {
             ) {
               errors.email = 'Invalid email address';
             }
-            if (!values.password) {
-              errors.password = 'Required';
-            } else if (values.password.length < 8 ){
+            if (values.password && values.password.length <= 8 ){
               errors.password = 'Password is short'
             }
             return errors;

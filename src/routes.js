@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 // const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
@@ -54,6 +55,7 @@ const CreateCompany = React.lazy(() => import('./views/pages/company/CreateCompa
 const UpdateCompany = React.lazy(() => import('./views/pages/company/UpdateCompany'))
 const Event = React.lazy(() => import('./views/pages/event/ListEvent'))
 const CreateEvent = React.lazy(() => import('./views/pages/event/CreateEvent'))
+const UpdateEvent = React.lazy(() => import('./views/pages/event/UpdateEvent'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -63,7 +65,7 @@ const routes = [
   { path: '/company/update/:id', name: 'Update', element: UpdateCompany, exact: true },
   { path: '/event', name: 'Event', element: Event, exact: true },
   { path: '/event/create', name: 'Create', element: CreateEvent, exact: true },
-  // { path: '/event/update/:id', name: 'Update', element: UpdateCompany, exact: true },
+  { path: '/event/update/:id', name: 'Update', element: UpdateEvent, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },

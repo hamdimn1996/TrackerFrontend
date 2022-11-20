@@ -32,11 +32,11 @@ const CreateEvent = () => {
               eventDescription: '',
               eventDate: '',
               eventTime: '',
-              price: '',
-              availableTicketNumber: '',
+              price: 0,
+              availableTicketNumber: 0,
               location: '',
-              eventType:'',
-              photo:''
+              eventType: '',
+              photo: ''
             }
           }
           validate={values => {
@@ -53,7 +53,7 @@ const CreateEvent = () => {
             if (!values.eventTime) {
               errors.eventTime = 'Required';
             }
-            if (!values.price) {
+            if (!values.price && values.eventType === 'Paid') {
               errors.price = 'Required';
             }
             if (!values.availableTicketNumber) {
@@ -67,6 +67,7 @@ const CreateEvent = () => {
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
             values.photo = eventPhoto.photo
+            values.eventType === 'Free' && (values.price = 0)
             try {
               const response = await eventService.createOne(values);
               toast.success(response.data.message)
@@ -137,16 +138,47 @@ const CreateEvent = () => {
                 value={values.availableTicketNumber}
               />
               <p style={{ color: 'red' }}>{errors.availableTicketNumber && touched.availableTicketNumber && errors.availableTicketNumber}</p>
-                {/*  */}
-              <label>Price</label>
-              <input
-                type="number"
-                name="price"
-                className='form-control'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.price}
-              />
+              <div className='d-flex align-items-center'>
+                <label>Event type:</label>
+                <div className="form-check d-flex align-items-center mx-3">
+                  <input
+                    type="radio"
+                    name="eventType"
+                    id='free'
+                    className='form-check-input'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value='Free'
+                  />
+                  <label htmlFor='free'>Free</label>
+                </div>
+                <div className="form-check d-flex align-items-center mx-3">
+                  <input
+                    type="radio"
+                    name="eventType"
+                    id='paid'
+                    className='form-check-input'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value='Paid'
+                  />
+                  <label htmlFor='paid'>Paid</label>
+                </div>
+                <p className='text-danger'> {errors.eventType && touched.eventType && errors.eventType}</p>
+              </div>
+              {values.eventType === 'Paid' ? 
+                <>
+                  <label>Price</label>
+                  <input
+                    type="number"
+                    name="price"
+                    className='form-control'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.price}
+                  />
+                </>
+              :  null}
               <p style={{ color: 'red' }}>{errors.price && touched.price && errors.price}</p>
               <label>Location</label>
               <input

@@ -7,6 +7,7 @@ import companyService from '../../services/company'
 function UpdateCompany() {
   const navigate = useNavigate();
   const params = useParams();
+  const [companyPhoto, setCompanyPhoto] = useState('')
   const [company, setCompany] = useState()
   let loadedData = company
 
@@ -15,16 +16,17 @@ function UpdateCompany() {
     reader.readAsDataURL(e.target.files[0]);
     reader.onloadend = () => {
       const base64String = (reader.result).replace("data:", "").replace(/^.+,/, "")
-      setCompany({ ...company, [e.target.name]: "data:image/jpeg;base64," + base64String.toString() })
+      setCompanyPhoto("data:image/jpeg;base64," + base64String.toString())
     }
   }
   useEffect(() => {
     const getCompany = async () => {
       const response = await companyService.getOne(params.id)
       setCompany(response.data)
+      setCompanyPhoto(response.data.photo)
     }
     getCompany()
-  }, [params.id])
+  },[params.id])
   return (
     <div className="card">
       <div className="card-header">
@@ -58,9 +60,7 @@ function UpdateCompany() {
             ) {
               errors.email = 'Invalid email address';
             }
-            if (!values.password) {
-              errors.password = 'Required';
-            } else if (values.password.length < 8) {
+            if (values.password && values.password.length <= 8) {
               errors.password = 'Password is short'
             }
             return errors;
@@ -77,7 +77,6 @@ function UpdateCompany() {
             }
           }}
           enableReinitialize
-          
         >
           {({
             values,
@@ -129,12 +128,12 @@ function UpdateCompany() {
                 name="password"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.password}
+                value={values.password ? values.password :""}
                 className="form-control mt-4"
                 placeholder="Password"
               />
               <p style={{ color: 'red' }}>{errors.password && touched.password && errors.password}</p>
-              <label>Password:</label>
+              <label>Role:</label>
               <select
                 name="role"
                 onChange={handleChange}
@@ -153,7 +152,7 @@ function UpdateCompany() {
                 onBlur={handleBlur}
                 className="form-control mt-4"
               />
-              <img src={values.photo} alt='' width='200px' className="d-block my-4" />
+              <img src={companyPhoto} alt='' width='200px' className="d-block my-4" />
               <button type="submit" disabled={isSubmitting} className="btn btn-primary px-5">
                 Update
               </button>
