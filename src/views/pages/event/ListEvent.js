@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import eventService from 'src/views/services/event';
+import Swal from 'sweetalert2';
 
 const ListEvent = () => {
     const [events, setEvents] = useState([])
@@ -12,9 +13,29 @@ const ListEvent = () => {
     setEvents(response.data)
   }
   const handleDelete = async (id) => {
-    const response = await eventService.removeOne(id)
-    getEvents()
-    toast.success(response.data.message)
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger me-2'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      // icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await eventService.removeOne(id)
+        getEvents()
+        toast.success(response.data.message)
+      } 
+    })
   }
 
   useEffect(() => {
@@ -27,9 +48,9 @@ const ListEvent = () => {
             </div>
             <div className="card-body">
                 <Link className='btn btn-secondary my-4' to='/event/create'>Create Event</Link>
-                <table className="table table-hover">
+                <table className="table table-hover table-striped">
                     <thead>
-                        <tr>
+                        <tr style={{backgroundColor :'#46546C', color: 'white'}}>
                             <th className='col-1'>#</th>
                             <th className='col-2'>Title</th>
                             <th className='col-3'>Date & time</th>

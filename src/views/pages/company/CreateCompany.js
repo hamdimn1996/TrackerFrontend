@@ -30,8 +30,7 @@ function CreateCompany() {
             companyDescription: '',
             email: '',
             password: '',
-            role: 'Admin',
-            photo: ''
+            role: 'Admin'
           }}
           validate={values => {
             const errors = {};
@@ -48,14 +47,14 @@ function CreateCompany() {
             ) {
               errors.email = 'Invalid email address';
             }
-            if (values.password && values.password.length <= 8 ){
+            if (values.password && values.password.length < 8 ){
               errors.password = 'Password is short'
             }
             return errors;
           }}
           onSubmit={ async (values, { setSubmitting }) => {
               setSubmitting(false);
-              values.photo = companyPhoto.photo
+              companyPhoto.photo && (values.photo = companyPhoto.photo)
               try {
                 const response = await companyService.createOne(values);
                 toast.success(response.data.message)

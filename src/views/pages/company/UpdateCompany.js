@@ -7,7 +7,7 @@ import companyService from '../../services/company'
 function UpdateCompany() {
   const navigate = useNavigate();
   const params = useParams();
-  const [companyPhoto, setCompanyPhoto] = useState('')
+  const [companyPhoto, setCompanyPhoto] = useState()
   const [company, setCompany] = useState()
   let loadedData = company
 
@@ -39,8 +39,7 @@ function UpdateCompany() {
             companyDescription: '',
             email: '',
             password: '',
-            role: 'Admin',
-            photo: ''
+            role: 'Admin'
           }}
           validate={values => {
             const errors = {};
@@ -60,14 +59,14 @@ function UpdateCompany() {
             ) {
               errors.email = 'Invalid email address';
             }
-            if (values.password && values.password.length <= 8) {
+            if (values.password && values.password.length < 8) {
               errors.password = 'Password is short'
             }
             return errors;
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
-            values.photo = company.photo
+            companyPhoto && (values.photo = companyPhoto)
             try {
               const response = await companyService.updateOne(params.id, values);
               toast.success(response.data.message)

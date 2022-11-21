@@ -6,6 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ResetPassword from './views/pages/reset/ResetPassword';
 import PrivateRoute from './views/PrivateRoute';
+import 'sweetalert2/dist/sweetalert2.js'
+
+import 'sweetalert2/src/sweetalert2.scss'
 
 const loading = (
   <div className="pt-3 text-center">

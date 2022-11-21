@@ -9,9 +9,7 @@ import eventService from 'src/views/services/event';
 const UpdateEvent = () => {
   const navigate = useNavigate()
   const params = useParams()
-  const [eventPhoto, setEventPhoto] = useState({
-    photo: ''
-  })
+  const [eventPhoto, setEventPhoto] = useState()
   const [event, setEvent] = useState()
   let loadedData = event
 
@@ -81,10 +79,10 @@ const UpdateEvent = () => {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
-            values.photo = eventPhoto.photo
+            eventPhoto && (values.photo = eventPhoto)
             values.eventType === 'Free' && (values.price = 0)
             try {
-              const response = await eventService.createOne(values);
+              const response = await eventService.updateOne(params.id,values);
               toast.success(response.data.message)
               navigate('../event')
             } catch (error) {
@@ -216,7 +214,7 @@ const UpdateEvent = () => {
               />
               <img src={eventPhoto} alt='' width='200px' className="d-block my-4" />
               <button type="submit" disabled={isSubmitting} className="btn btn-primary px-5">
-                Create
+                Update
               </button>
             </form>
           )}
