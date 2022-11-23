@@ -60,6 +60,7 @@ function CreateCompany() {
                 toast.success(response.data.message)
                 navigate('../company')
               } catch (error) {
+                console.log(error);
                 toast.danger(error.response.data.message)
               }
           }}
@@ -119,6 +120,16 @@ function CreateCompany() {
                 placeholder="Password"
               />
               <p style={{color:'red'}}>{errors.password && touched.password && errors.password}</p>
+              <select
+                name="role"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.role}
+                className="form-control mt-4"
+              >
+                <option value='Admin'>Admin</option>
+                <option value='Super_Admin'>Super Admin</option>
+              </select>
               <input
                 type="file"
                 name="photo"

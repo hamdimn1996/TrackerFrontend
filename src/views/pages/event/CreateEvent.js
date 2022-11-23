@@ -1,16 +1,24 @@
 import { Formik } from 'formik';
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
 import eventService from 'src/views/services/event';
+import TagService from 'src/views/services/tag';
 
 const CreateEvent = () => {
   const navigate = useNavigate()
   const [eventPhoto, setEventPhoto] = useState({
     photo: ''
   })
+  const [tags, setTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState([])
 
+  const onChangeOptions = (e) => {
+    setSelectedTags(e)
+  }
   const onFileSelect = async (e) => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -19,6 +27,14 @@ const CreateEvent = () => {
       setEventPhoto({ ...eventPhoto, [e.target.name]: "data:image/jpeg;base64," + base64String.toString() })
     }
   }
+
+  useEffect(() => {
+    const getTags = async () => {
+      const response = await TagService.getAllTagsForSelect();
+      setTags(response.data)
+    }
+    getTags()
+  }, [])
   return (
     <div className="card">
       <div className="card-header">
@@ -36,7 +52,8 @@ const CreateEvent = () => {
               availableTicketNumber: 0,
               location: '',
               eventType: '',
-              photo: ''
+              photo: '',
+              tags: []
             }
           }
           validate={values => {
@@ -66,6 +83,7 @@ const CreateEvent = () => {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
+            values.tags = selectedTags
             values.photo = eventPhoto.photo
             values.eventType === 'Free' && (values.price = 0)
             try {
@@ -166,7 +184,7 @@ const CreateEvent = () => {
                 </div>
                 <p className='text-danger'> {errors.eventType && touched.eventType && errors.eventType}</p>
               </div>
-              {values.eventType === 'Paid' ? 
+              {values.eventType === 'Paid' ?
                 <>
                   <label>Price</label>
                   <input
@@ -178,7 +196,7 @@ const CreateEvent = () => {
                     value={values.price}
                   />
                 </>
-              :  null}
+                : null}
               <p style={{ color: 'red' }}>{errors.price && touched.price && errors.price}</p>
               <label>Location</label>
               <input
@@ -190,6 +208,11 @@ const CreateEvent = () => {
                 value={values.location}
               />
               <p style={{ color: 'red' }}>{errors.location && touched.location && errors.location}</p>
+              <ReactSelect
+                onChange={onChangeOptions}
+                onBlur={handleBlur}
+                isMulti
+                options={tags} />
               <label>Photo</label>
               <input
                 type="file"

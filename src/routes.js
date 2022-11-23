@@ -56,6 +56,9 @@ const UpdateCompany = React.lazy(() => import('./views/pages/company/UpdateCompa
 const Event = React.lazy(() => import('./views/pages/event/ListEvent'))
 const CreateEvent = React.lazy(() => import('./views/pages/event/CreateEvent'))
 const UpdateEvent = React.lazy(() => import('./views/pages/event/UpdateEvent'))
+const Tag = React.lazy(() => import('./views/pages/tag/ListTag'))
+const CreateTag = React.lazy(() => import('./views/pages/tag/CreateTag'))
+const UpdateTag = React.lazy(() => import('./views/pages/tag/UpdateTag'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -66,6 +69,9 @@ const routes = [
   { path: '/event', name: 'Event', element: Event, exact: true },
   { path: '/event/create', name: 'Create', element: CreateEvent, exact: true },
   { path: '/event/update/:id', name: 'Update', element: UpdateEvent, exact: true },
+  { path: '/tag', name: 'Tag', element: Tag, exact: true },
+  { path: '/tag/create', name: 'Create', element: CreateTag, exact: true },
+  { path: '/tag/update/:id', name: 'Update', element: UpdateTag, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },

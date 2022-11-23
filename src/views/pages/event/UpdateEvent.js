@@ -3,14 +3,18 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
 import eventService from 'src/views/services/event';
+import TagService from 'src/views/services/tag';
 
 const UpdateEvent = () => {
   const navigate = useNavigate()
   const params = useParams()
   const [eventPhoto, setEventPhoto] = useState()
   const [event, setEvent] = useState()
+  const [tags, setTags] = useState([])
+  const [selectedTags, setSelectedTags] = useState([])
   let loadedData = event
 
   const onFileSelect = async (e) => {
@@ -21,12 +25,24 @@ const UpdateEvent = () => {
       setEventPhoto("data:image/jpeg;base64," + base64String.toString() )
     }
   }
-
+  const onChangeOptions = (e) => {
+    setSelectedTags(e)
+  }
   useEffect(()=>{
+    const getTags = async() => {
+      const response = await TagService.getAllTagsForSelect();
+      setTags(response.data)
+    }
+    getTags()
     const getEvent = async() => {
       const response = await eventService.getOne(params.id);
       setEvent(response.data)
       setEventPhoto(response.data.photo)
+      let tagsSelected = []
+      response.data.tags.map(tag => {
+        return tagsSelected.push({label:tag.title,value:tag._id})
+      })
+      setSelectedTags(tagsSelected)
       response.data.eventType === 'Paid' && document.getElementById('paid').setAttribute('checked',"")
       response.data.eventType === 'Free' && document.getElementById('free').setAttribute('checked',"")
     }
@@ -79,6 +95,7 @@ const UpdateEvent = () => {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
+            values.tags = selectedTags
             eventPhoto && (values.photo = eventPhoto)
             values.eventType === 'Free' && (values.price = 0)
             try {
@@ -203,6 +220,12 @@ const UpdateEvent = () => {
                 onBlur={handleBlur}
                 value={values.location}
               />
+              <ReactSelect
+                onChange={onChangeOptions}
+                onBlur={handleBlur}
+                isMulti
+                value={selectedTags}
+                options={tags} />
               <p style={{ color: 'red' }}>{errors.location && touched.location && errors.location}</p>
               <label>Photo</label>
               <input

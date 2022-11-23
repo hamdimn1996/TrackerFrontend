@@ -15,8 +15,8 @@ function ListCompanies() {
   const handleDelete = async (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger me-2'
+        confirmButton: 'btn btn-info',
+        cancelButton: 'btn btn-secondary me-5'
       },
       buttonsStyling: false
     })
@@ -52,12 +52,12 @@ function ListCompanies() {
         <table className="table table-hover table-striped">
           <thead>
             <tr style={{backgroundColor :'#46546C', color: 'white'}}>
-              <th className='col-1'>#</th>
+              <th className='col-1 text-center'>#</th>
               <th className='col-2'>Name</th>
               <th className='col-3'>E-mail</th>
               <th className='col-2'>Role</th>
               <th className='col-2'>Photo</th>
-              <th className='col-2'>Actions</th>
+              <th className='col-2 text-center'>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -65,13 +65,13 @@ function ListCompanies() {
               campanies.map((company, index) => {
                 return (
                   <tr key={index} className="">
-                    <td style={{backgroundColor :'#46546C', color: 'white'}}>{index + 1}</td>
+                    <td className='text-center'>{index + 1}</td>
                     <td>{company.companyName}</td>
                     <td>{company.email}</td>
                     <td>{company.role}</td>
                     <td><img src={company.photo} width='50px' height='50px' alt='' /></td>
-                    <td>
-                      <Link className='btn btn-info my-4' to={'/company/update/' + company._id}><CIcon icon={cilPen} size="lg" style={{ color: 'white' }} /></Link>
+                    <td className='text-center'>
+                      <Link className='btn btn-info' to={'/company/update/' + company._id}><CIcon icon={cilPen} size="lg" style={{ color: 'white' }} /></Link>
                       <button className='btn btn-danger ms-3' onClick={() => handleDelete(company._id)} ><CIcon icon={cilTrash} size="lg" style={{ color: 'white' }} /></button>
                     </td>
                   </tr>
