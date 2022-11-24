@@ -208,6 +208,7 @@ const CreateEvent = () => {
                 value={values.location}
               />
               <p style={{ color: 'red' }}>{errors.location && touched.location && errors.location}</p>
+              <label>Tags</label>
               <ReactSelect
                 onChange={onChangeOptions}
                 onBlur={handleBlur}

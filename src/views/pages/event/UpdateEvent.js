@@ -220,6 +220,7 @@ const UpdateEvent = () => {
                 onBlur={handleBlur}
                 value={values.location}
               />
+              <label>Tags</label>
               <ReactSelect
                 onChange={onChangeOptions}
                 onBlur={handleBlur}

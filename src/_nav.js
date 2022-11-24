@@ -2,12 +2,10 @@ import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilBell,
-  // cilCalculator,
-  // cilChartPie,
   cilCursor,
   cilDescription,
   cilDrop,
-  cilFax,
+  cilInstitution,
   cilNotes,
   cilPencil,
   cilPuzzle,
@@ -41,19 +39,19 @@ const _nav = [
     component: CNavItem,
     name: 'Company',
     to: '/company',
-    icon: <CIcon icon={cilFax} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilInstitution} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Event',
     to: '/event',
-    icon: <CIcon icon={cilFax} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Tag',
     to: '/tag',
-    icon: <CIcon icon={cilFax} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
