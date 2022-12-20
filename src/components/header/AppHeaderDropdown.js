@@ -30,10 +30,10 @@ import { useNavigate } from 'react-router-dom'
 const AppHeaderDropdown = () => {
   const navigate = useNavigate()
   const logoutUser = async (e)=> {
-    const response = await axios.post('http://localhost:4000/app/v1/logout');
+    const response = await axios.post('http://localhost:4000/logout');
     console.log(response);
     toast.success(response.data.message)
-    localStorage.removeItem('accessToken')
+    localStorage.removeItem('token')
     navigate('/login')
   }
   return (

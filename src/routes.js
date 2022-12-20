@@ -50,18 +50,44 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'))
 const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 // const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
-const Company = React.lazy(() => import('./views/pages/company/ListCompanies'))
-const CreateCompany = React.lazy(() => import('./views/pages/company/CreateCompany'))
-const UpdateCompany = React.lazy(() => import('./views/pages/company/UpdateCompany'))
+const Company = React.lazy(() => import('./views/pages/Users/ListCompanies'))
+const CreateCompany = React.lazy(() => import('./views/pages/Users/CreateCompany'))
+const UpdateCompany = React.lazy(() => import('./views/pages/Users/UpdateCompany'))
 const Event = React.lazy(() => import('./views/pages/event/ListEvent'))
 const CreateEvent = React.lazy(() => import('./views/pages/event/CreateEvent'))
 const UpdateEvent = React.lazy(() => import('./views/pages/event/UpdateEvent'))
 const Tag = React.lazy(() => import('./views/pages/tag/ListTag'))
 const CreateTag = React.lazy(() => import('./views/pages/tag/CreateTag'))
 const UpdateTag = React.lazy(() => import('./views/pages/tag/UpdateTag'))
+
+
+
+const CreateProject = React.lazy(() => import('./views/pages/project/CreateProject'))
+const ListProjects = React.lazy(() => import('./views/pages/project/ListProject'))
+const UpdateProject = React.lazy(() => import('./views/pages/project/UpdateProject'))
+
+
+const CreateUtilisateur = React.lazy(() => import('./views/pages/collaborators/CreateUtilisateur'))
+const ListUtilisateurs = React.lazy(() => import('./views/pages/collaborators/ListUtilisateurs'))
+const UpdateUtilisateur = React.lazy(() => import('./views/pages/collaborators/UpdateUtilisateur'))
+
+
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // { path: '/dashboard', name: 'Dashboard', element: Dashboard },
+  
+  { path: '/projets/creer', name: 'Ajouter', element: CreateProject, exact: true },
+  { path: '/projets', name: 'List', element: ListProjects, exact: true },
+  { path: '/projets/modifier/:id', name: 'Modifier', element: UpdateProject, exact: true },
+
+  { path: '/utilisateurs/creer', name: 'Ajouter', element: CreateUtilisateur, exact: true },
+  { path: '/utilisateurs', name: 'Liste', element: ListUtilisateurs, exact: true },
+  { path: '/utilisateurs/modifier/:id', name: 'Modifier', element: UpdateUtilisateur, exact: true },
+  
+  
+  
+  
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/company', name: 'Company', element: Company, exact: true },
   { path: '/company/create', name: 'Create', element: CreateCompany, exact: true },

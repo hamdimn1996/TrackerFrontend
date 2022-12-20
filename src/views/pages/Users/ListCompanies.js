@@ -4,10 +4,15 @@ import React, { useEffect, useState } from 'react'
 import { Link} from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Swal from 'sweetalert2'
+import jwt_decode from 'jwt-decode'
 import companyService from '../../services/company'
 
 function ListCompanies() {
   const [campanies, setCompanies] = useState([])
+  const [storage , setStorage] = useState({
+    companyId:'',
+    role:''
+  })
   const getCompanies = async () => {
     const response = await companyService.getAllCompanies();
     setCompanies(response.data);
@@ -41,6 +46,9 @@ function ListCompanies() {
 
   useEffect(() => {
     getCompanies()
+    const token = localStorage.getItem('accessToken')
+    const decoded = jwt_decode(token);
+    setStorage(decoded)
   }, [])
   return (
     <div className="card">
@@ -70,9 +78,13 @@ function ListCompanies() {
                     <td>{company.email}</td>
                     <td>{company.role}</td>
                     <td><img src={company.photo} width='50px' height='50px' alt='' /></td>
-                    <td className='text-center'>
+                    <td className=''>
                       <Link className='btn btn-info' to={'/company/update/' + company._id}><CIcon icon={cilPen} size="lg" style={{ color: 'white' }} /></Link>
-                      <button className='btn btn-danger ms-3' onClick={() => handleDelete(company._id)} ><CIcon icon={cilTrash} size="lg" style={{ color: 'white' }} /></button>
+                      {storage.companyId === company._id ? <button className='btn btn-danger ms-3' 
+                      onClick={() => handleDelete(company._id)} 
+                      ><CIcon icon={cilTrash} size="lg" 
+                      style={{ color: 'white' }} />
+                      </button>: null}
                     </td>
                   </tr>
                 )

@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = 'http://localhost:4000/app/v1'
+const BASE_URL = 'http://localhost:4000'
 const axiosApiInstance=  axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -11,7 +11,7 @@ const axiosApiInstance=  axios.create({
 // Request interceptor for API calls
 axiosApiInstance.interceptors.request.use(
   async config => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('token');
     config.headers = { 
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json'

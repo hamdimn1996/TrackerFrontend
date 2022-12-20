@@ -7,18 +7,18 @@ const isExpiredToken = (token) => {
     return Math.floor(new Date().getTime()/1000)>=decoded.exp
 }
 const PrivateRoute = ({ children }) => {
-    const token = localStorage.getItem('accessToken')
+    const token = localStorage.getItem('token')
     if (token !== null) {
         const expire = isExpiredToken(token)
         if (expire) {
             toast.error('Token expired!')
-            localStorage.removeItem('accessToken')
+            localStorage.removeItem('token')
             return <Navigate to='/login' />
         } else {
             return children;
         }
     } else {
-        localStorage.removeItem('accessToken')
+        localStorage.removeItem('token')
         return <Navigate to='/login' />
     }
 }

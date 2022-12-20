@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault()
     try {
       const response = await authService.login(loginForm)
-      localStorage.setItem('accessToken',response.data.token)
+      localStorage.setItem('token',response.data.token)
       toast.success(response.data.message)
       navigate('/dashboard')
     } catch (error) {
