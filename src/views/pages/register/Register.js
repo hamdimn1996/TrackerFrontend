@@ -6,8 +6,8 @@ import { toast } from 'react-toastify'
 function Register() {
   const navigate = useNavigate()
   const [registerForm, setRegisterForm] = useState({
-    companyName: '',
-    companyDescription: '',
+    nom: '',
+    prenom: '',
     email: '',
     password: ''
   })
@@ -21,7 +21,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:4000/app/v1/register', registerForm)
+      const response = await axios.post('http://localhost:4000/createAdmin', registerForm)
       toast.success(response.data.message)
       navigate('/login')
     } catch (error) {
@@ -34,10 +34,10 @@ function Register() {
       <div className='col-6 d-flex flex-column justify-content-center align-items-center bg-white p-5 rounded-4'>
         <h1 style={{ color: '#5141E0', marginBottom: '50px', textAlign: 'center' }}>SIGN UP</h1>
         <form className='d-flex flex-column w-100' onSubmit={handleSubmit}>
-          <label htmlFor='companyName' className='form-label text-black-50'>Company Name</label>
-          <input type='text' onChange={handleChange} className='form-control mb-3' id='companyName' />
-          <label htmlFor='companyDescription' className='form-label text-black-50'>Description</label>
-          <input type='text' onChange={handleChange} className='form-control mb-3' id='companyDescription' />
+          <label htmlFor='nom' className='form-label text-black-50'>Nom</label>
+          <input type='text' onChange={handleChange} className='form-control mb-3' id='nom' />
+          <label htmlFor='prenom' className='form-label text-black-50'>Description</label>
+          <input type='text' onChange={handleChange} className='form-control mb-3' id='prenom' />
           <label htmlFor='email' className='form-label text-black-50'>E-mail</label>
           <input type='email' onChange={handleChange} className='form-control mb-3' id='email' />
           <label htmlFor='password' className='form-label text-black-50'>Password</label>

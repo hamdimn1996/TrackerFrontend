@@ -9,26 +9,26 @@ import {
   cilNotes,
   // cilPencil,
   cilPuzzle,
-  cilSpeedometer,
+  // cilSpeedometer,
   // cilStar,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
-  {
-    component: CNavItem,
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-  {
-    component: CNavTitle,
-    name: 'Theme',
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Dashboard',
+  //   to: '/dashboard',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW',
+  //   },
+  // },
+  // {
+  //   component: CNavTitle,
+  //   name: 'Theme',
+  // },
   // {
   //   component: CNavItem,
   //   name: 'Colors',
@@ -61,7 +61,7 @@ const _nav = [
   // },
   {
     component: CNavTitle,
-    name: 'Components',
+    name: 'Administrateur dashboard',
   },
   {
     component: CNavGroup,
@@ -177,7 +177,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'List des tickets',
-        to: '/tickets/list',
+        to: '/tickets',
       },
       // {
       //   component: CNavItem,

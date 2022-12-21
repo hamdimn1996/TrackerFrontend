@@ -25,16 +25,15 @@ function ListUtilisateurs() {
         <h3>Liste des utilisateurs</h3>
       </div>
       <div className="card-body">
-        <Link className='btn btn-secondary my-4' to='/utilisateurs/creer'>Ajouter un utilisateur</Link>
-        <table className="table table-hover table-striped">
+        <table className="table table-hover table-striped ">
           <thead>
             <tr style={{backgroundColor :'#46546C', color: 'white'}}>
               <th className='col-1 text-center'>#</th>
               <th className='col-2'>Nom</th>
-              <th className='col-3'>Prénom</th>
-              <th className='col-3'>Adress</th>
-              <th className='col-3'>role</th>
-              <th className='col-2 text-center'>Actions</th>
+              <th className='col-2'>Prénom</th>
+              <th className='col-2'>Adress</th>
+              <th className='col-2'>role</th>
+              <th className='col-3 text-center'>Actions</th>
             </tr>
           </thead>
           <tbody>

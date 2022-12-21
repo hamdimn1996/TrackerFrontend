@@ -50,9 +50,9 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'))
 const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 // const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
-const Company = React.lazy(() => import('./views/pages/Users/ListCompanies'))
-const CreateCompany = React.lazy(() => import('./views/pages/Users/CreateCompany'))
-const UpdateCompany = React.lazy(() => import('./views/pages/Users/UpdateCompany'))
+const Company = React.lazy(() => import('./views/pages/company/ListCompanies'))
+const CreateCompany = React.lazy(() => import('./views/pages/company/CreateCompany'))
+const UpdateCompany = React.lazy(() => import('./views/pages/company/UpdateCompany'))
 const Event = React.lazy(() => import('./views/pages/event/ListEvent'))
 const CreateEvent = React.lazy(() => import('./views/pages/event/CreateEvent'))
 const UpdateEvent = React.lazy(() => import('./views/pages/event/UpdateEvent'))
@@ -72,6 +72,9 @@ const ListUtilisateurs = React.lazy(() => import('./views/pages/collaborators/Li
 const UpdateUtilisateur = React.lazy(() => import('./views/pages/collaborators/UpdateUtilisateur'))
 
 
+const CreateTicket = React.lazy(() => import('./views/pages/tickets/CreateTicket'))
+const ListTickets = React.lazy(() => import('./views/pages/tickets/ListTicket'))
+
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -86,7 +89,10 @@ const routes = [
   { path: '/utilisateurs/modifier/:id', name: 'Modifier', element: UpdateUtilisateur, exact: true },
   
   
-  
+  { path: '/tickets/creer', name: 'Ajouter', element: CreateTicket, exact: true },
+  { path: '/tickets', name: 'List', element: ListTickets, exact: true },
+
+
   
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/company', name: 'Company', element: Company, exact: true },

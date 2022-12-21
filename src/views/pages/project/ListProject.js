@@ -25,14 +25,13 @@ function ListProject() {
         <h3>Liste des projets</h3>
       </div>
       <div className="card-body">
-        <Link className='btn btn-secondary my-4' to='/company/create'>Create company</Link>
         <table className="table table-hover table-striped">
           <thead>
             <tr style={{backgroundColor :'#46546C', color: 'white'}}>
               <th className='col-1 text-center'>#</th>
               <th className='col-2'>Nom</th>
               <th className='col-3'>Description</th>
-              <th className='col-2 text-center'>Actions</th>
+              <th className='col-3 text-center'>Actions</th>
             </tr>
           </thead>
           <tbody>
